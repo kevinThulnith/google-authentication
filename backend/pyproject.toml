@@ -1,0 +1,20 @@
+[project]
+name = "google"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "asgiref>=3.9.1",
+    "cryptography>=45.0.7",
+    "dj-rest-auth==2.2.4",
+    "django>=5.2.6",
+    "django-allauth==0.54.0",
+    "django-cors-headers>=4.7.0",
+    "djangorestframework>=3.16.1",
+    "djangorestframework-simplejwt>=5.5.1",
+    "pyjwt>=2.10.1",
+    "python-dotenv>=1.1.1",
+    "requests>=2.32.5",
+    "sqlparse>=0.5.3",
+]
