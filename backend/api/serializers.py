@@ -1,8 +1,9 @@
-# api/serializers.py
-
 from dj_rest_auth.registration.serializers import SocialLoginSerializer
 from django.contrib.auth.models import User
 from rest_framework import serializers
+
+
+# TODO: Create serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
             "email",
             "password",
-        ]  # It's better to be explicit than use "__all__"
+        ]
         extra_kwargs = {"password": {"write_only": True, "required": True}}
 
     def create(self, validated_data):
@@ -26,17 +27,16 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class GoogleLoginSerializer(SocialLoginSerializer):
-    # These fields are required to accept the token/code from the frontend
+    # !These fields are required to accept the token/code from the frontend
     code = serializers.CharField(required=False, allow_blank=True)
     access_token = serializers.CharField(required=False, allow_blank=True)
     id_token = serializers.CharField(required=False, allow_blank=True)
 
     def validate(self, attrs):
-        # We call the parent class's validation first
+        # !data validation
         attrs = super().validate(attrs)
 
-        # Then, we add our custom validation
-        # At least one of the token fields must be set
+        # !custom validation
         if (
             not attrs.get("code")
             and not attrs.get("access_token")

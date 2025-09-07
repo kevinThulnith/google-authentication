@@ -1,11 +1,13 @@
 # api/urls.py
+from .views import CreateUserView, UserInfoView, GoogleLoginView
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
-    TokenRefreshView,
     TokenBlacklistView,
+    TokenRefreshView,
 )
-from .views import CreateUserView, UserInfoView, GoogleLoginView
+
+# TODO: Add API urls
 
 urlpatterns = [
     path("user/", UserInfoView.as_view(), name="user_info"),
