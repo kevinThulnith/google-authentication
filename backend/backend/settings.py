@@ -48,7 +48,10 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
-    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "AUTH_TOKEN_CLASSES": (
+        "rest_framework_simplejwt.tokens.AccessToken",
+        "rest_framework_simplejwt.tokens.RefreshToken",
+    ),
 }
 
 # Application definition
@@ -115,6 +118,11 @@ ACCOUNT_USERNAME_REQUIRED = True
 # dj-rest-auth settings
 REST_AUTH = {
     "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "auth-token",
+    "JWT_AUTH_REFRESH_COOKIE": "refresh-token",
+    "JWT_AUTH_HTTPONLY": False,  # Set to False so frontend can access tokens
+    "SESSION_LOGIN": False,
+    "REGISTER_SERIALIZER": "api.serializers.UserSerializer",
 }
 
 # settings.py
