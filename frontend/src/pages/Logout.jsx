@@ -10,15 +10,30 @@ function Logout({ setIsAuthenticated }) {
   useEffect(() => {
     const logout = async () => {
       try {
-        await api.post("/api/token/blacklist/", {
-          refresh: localStorage.getItem(REFRESH_TOKEN),
-        });
-      } catch (error) {
-        console.error("Logout failed:", error);
-      } finally {
+        const refreshToken = localStorage.getItem(REFRESH_TOKEN);
+        console.log("Refresh token to blacklist:", refreshToken);
+
+        // Always clean up localStorage and redirect regardless of blacklisting success
         localStorage.removeItem(ACCESS_TOKEN);
         localStorage.removeItem(REFRESH_TOKEN);
         setIsAuthenticated(false);
+
+        // !Chech and try to blacklist the refresh token if it exists
+        if (refreshToken && refreshToken.length > 0) {
+          api
+            .post("/api/token/blacklist/", { refresh: refreshToken })
+            .then(() => console.log("Token blacklisted successfully"))
+            .catch((innerError) =>
+              console.error(
+                "Could not blacklist token:",
+                innerError.response ? innerError.response.data : innerError
+              )
+            );
+        } else console.log("No refresh token found to blacklist");
+      } catch (error) {
+        console.error("Logout process error:", error);
+      } finally {
+        // Always navigate to login page
         navigate("/login");
       }
     };
