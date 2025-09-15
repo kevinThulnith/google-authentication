@@ -1,7 +1,7 @@
 import { FaBarsStaggered, FaAnglesRight } from "react-icons/fa6";
 import { useState, useCallback, memo } from "react";
-import logo from "../assets/logo.png";
 import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 // !Memoized NavLink component for better performance
 const NavItem = memo(({ to, label, onClick, className, icon }) => (
