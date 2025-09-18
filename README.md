@@ -12,7 +12,7 @@
 
 # 🔐 Google Authentication with Django & React
 
-A full-stack web application demonstrating secure authentication using Google OAuth, Django REST Framework, and React.
+A full-stack web application demonstrating secure authentication using Google OAuth2, Django REST Framework, and React.
 
 ![Project Demo](./frontend/public/logo.png)
 
